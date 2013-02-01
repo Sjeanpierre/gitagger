@@ -1,4 +1,24 @@
 Gitagger::Application.routes.draw do
+  match "github/branch", :to => 'github#branch'
+
+  get "git_hub/repo"
+
+  get "git_hub/tag"
+
+  get "home/index"
+
+  #get "sessions/new"
+
+  #get "sessions/create"
+
+  #get "sessions/failure"
+  
+  #get   '/login', :to => 'sessions#new', :as => :login
+  match '/auth/:provider/callback', :to => 'sessions#create'
+	get '/login', :to => 'session#create'
+	get '/logout', :to => 'sessions#destroy'
+	root :to => "home#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -6,6 +6,8 @@
 
 # Ignore bundler config
 /.bundle
+/.idea
+.DS_Store
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -13,3 +15,23 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+.idea/dataSources.xml
+
+.idea/encodings.xml
+
+.idea/gitagger.iml
+
+.idea/gitagger.iml
+
+.idea/misc.xml
+
+.idea/modules.xml
+
+.idea/vcs.xml
+
+.idea/scopes/scope_settings.xml
+
+.idea/misc.xml
+
+.idea/gitagger.iml
