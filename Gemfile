@@ -6,7 +6,14 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'github_api'
 
+group :development do
+	gem 'pry'
+	gem 'awesome_print'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
