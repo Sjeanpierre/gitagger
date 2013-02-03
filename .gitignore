@@ -35,3 +35,5 @@
 .idea/misc.xml
 
 .idea/gitagger.iml
+
+config/initializers/omniauth.rb
