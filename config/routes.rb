@@ -1,7 +1,7 @@
 Gitagger::Application.routes.draw do
   match "github/branch", :to => 'github#branch'
 
-  get "git_hub/repo"
+  match "github/repo", :to => 'github#repo'
 
   get "git_hub/tag"
 

@@ -14,9 +14,8 @@ class GithubController < ApplicationController
   def repo
 		user = User.find(session[:user_id])
 		github_connection = Github.new :oauth_token => user.git_token
-		@branches = get_repos(github_connection)
-		binding.pry
-		render :text => @branches
+		@repos = get_repos(github_connection)
+		render :repo
   end
 
   def tag
