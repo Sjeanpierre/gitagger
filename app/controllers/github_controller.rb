@@ -8,7 +8,6 @@ class GithubController < ApplicationController
 		github_connection = Github.new :oauth_token => user.git_token
     @branches = get_repos(github_connection)
 		render :text => @branches
-		binding.pry
   end
 
   def repo

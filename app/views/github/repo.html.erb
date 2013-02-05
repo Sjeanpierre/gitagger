@@ -11,15 +11,15 @@
       <th width="30%">Last Push Date</th>
     </tr>
     </thead>
+    <tbody>
     <%@repos.each do |repo|%>
-        <tfoot>
-        <tr class="odd gradeX">
+        <tr class="odd gradeC">
           <td><%=repo.id%></td>
           <td><%=repo.full_name%></td>
           <td><%=repo.owner.login%></td>
           <td><%=repo.pushed_at.to_date.to_s(:long)%></td>
         </tr>
     <% end %>
-    </tfoot>
+    </tbody>
   </table>
 </div>
