@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 		@authorization = Authorization.find_by_provider_and_uid(authentication_hash["provider"], authentication_hash["uid"])
 		if @authorization
 			session[:user_id] = @authorization.user.id
+			#redirect user to repo list once logged in
 			render :text => "Welcome back #{@authorization.user.name}! You have already signed up."
 		else
 			user = User.new(:name => authentication_hash["info"]["name"],
@@ -16,6 +17,7 @@ class SessionsController < ApplicationController
 			user.authorizations.build :provider => authentication_hash["provider"], :uid => authentication_hash["uid"]
 			user.save
 			session[:user_id] = user.id
+			#redirect user to repo list when signup is complete
 			render :text => "Hi #{user.name}! You've signed up."
 		end
 	end
