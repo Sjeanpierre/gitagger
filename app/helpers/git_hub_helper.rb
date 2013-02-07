@@ -33,11 +33,23 @@ module GitHubHelper
 
 	def get_repo_branches(git_connection,repo_name,repo_owner)
 		#TODO this method uses the username of the user which has the ability to change. handle edge cases
-		repo_branches = git_connection.repos.branches(repo_owner,repo_name)
+		#TODO horribly horribly inefficient code. Github api limitation. need to cache and thread
+		branches = git_connection.repos.branches(repo_owner,repo_name)
+		repo_branches = []
+		branches.each do |branch|
+			puts "doing #{branch}"
+		  branch_details = git_connection.repos.branch(repo_owner,repo_name,branch.name)
+			repo_branches.push(branch_details)
+		end
 		repo_branches
 	end
 
-	def get_branch_commits(git_connection,repo_name,repo_owner,branch_name)
-		git_connection.get_request("/repos/#{repo_owner}/#{repo_name}/commits", { :sha =>"#{branch_name}"})
+	def get_commits(git_connection,repo_name,repo_owner, branch_name=false)
+		if branch_name
+		  git_connection.get_request("/repos/#{repo_owner}/#{repo_name}/commits", { :sha =>"#{branch_name}"})
+		else
+			git_connection.repos.commits.all(repo_owner,repo_name)
+			#git_connection.get_request("/repos/#{repo_owner}/#{repo_name}/commits")
+		end
 	end
 end
