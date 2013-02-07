@@ -1,6 +1,7 @@
 Gitagger::Application.routes.draw do
   match "github/:repo_owner/:repo_name/branches", :to => 'github#branch'
 	match "github/:repo_owner/:repo_name/:branch_name/commits", :constraints => {:branch_name => /[^\/]+/}, :to => 'github#commit'
+	match 'github/:repo_owner/:repo_name/commits', :to => 'github#commit'
 
   match "github/repos", :to => 'github#repo'
 
