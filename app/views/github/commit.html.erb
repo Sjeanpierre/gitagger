@@ -7,8 +7,9 @@
     <thead>
     <tr>
       <th width="15%">Commit Date</th>
-      <th width="20%">Committer Name</th>
-      <th width="65%">Commit Message</th>
+      <th width="10%">Committer</th>
+      <th width="55%">Commit Message</th>
+      <th width="17%">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -16,7 +17,14 @@
         <tr class="odd gradeC">
           <td><%=commit.commit.author["date"].to_date.to_s(:long)%></td>
           <td><%=commit.commit.committer.name%></td>
-          <td><%=commit.commit.message%></td>
+          <td><%=truncate(commit.commit.message, :length => 77, :omission => '...')%></td>
+          <td style="text-align:center;"><div class="btn-group">
+            <a class="btn btn-primary" href="#"><i class="icon-tag icon-white"></i> Tag Commit</a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><i class="icon-info-sign"></i> Details</a></li>
+            </ul>
+          </div></td>
         </tr>
     <% end %>
     </tbody>

@@ -8,19 +8,29 @@
     <tr>
       <th width="10%">Repo ID</th>
       <th width="30%">Repo Name</th>
-      <th width="30%">Repo Owner</th>
-      <th width="15%">Last Push Date</th>
-      <th width="15">Action</th>
+      <th width="20%">Repo Owner</th>
+      <th width="20%">Last Push Date</th>
+      <th width="17%">Action</th>
     </tr>
     </thead>
     <tbody>
     <%@repos.each do |repo|%>
-        <tr class="odd gradeC">
+        <tr>
           <td><%=repo.id%></td>
           <td><%=repo.full_name%></td>
           <td><%=repo.owner.login%></td>
           <td><%=repo.pushed_at.to_date.to_s(:long)%></td>
-          <td><%=link_to "list branches", "/github/#{repo.owner.login}/#{repo.name}/branches" %></td>
+          <td><div class="btn-group">
+            <a class="btn btn-primary" href="<%="/github/#{repo.owner.login}/#{repo.name}/branches" %>"><i class="icon-sitemap icon-white"></i> List Branches</a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><i class="icon-tag"></i> Tag Master</a></li>
+              <li class="divider"></li>
+              <li><a href="#"><i class="icon-github"></i> Commits</a></li>
+              <li class="divider"></li>
+              <li><a href="#"><i class="icon-tags"></i> List Tags</a></li>
+            </ul>
+          </div></td>
         </tr>
     <% end %>
     </tbody>
