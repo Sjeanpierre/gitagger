@@ -22,7 +22,7 @@ class GithubController < ApplicationController
 		repo_name   = params[:repo_name]
 		repo_owner  = params[:repo_owner]
 		@branch_name = params[:branch_name]
-		@commits = get_branch_commits(git_connection,repo_name,repo_owner,@branch_name)
+		@commits = get_commits(git_connection,repo_name,repo_owner,@branch_name)
 		render :commit
 	end
 
