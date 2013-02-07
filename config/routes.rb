@@ -22,7 +22,7 @@ Gitagger::Application.routes.draw do
   match '/auth/:provider/callback', :to => 'sessions#create'
 	get '/login', :to => 'session#create'
 	get '/logout', :to => 'sessions#destroy'
-	root :to => "home#index"
+	root :to => 'home#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
