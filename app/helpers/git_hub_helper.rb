@@ -36,11 +36,17 @@ module GitHubHelper
 		#TODO horribly horribly inefficient code. Github api limitation. need to cache and thread
 		branches = git_connection.repos.branches(repo_owner,repo_name)
 		repo_branches = []
+		repo_threads = []
+		start = Time.now
 		branches.each do |branch|
-			puts "doing #{branch}"
-		  branch_details = git_connection.repos.branch(repo_owner,repo_name,branch.name)
-			repo_branches.push(branch_details)
+			repo_threads << Thread.new {
+				branch_details = git_connection.repos.branch(repo_owner,repo_name,branch.name)
+				puts "#{branch.name}"
+				repo_branches.push(branch_details)
+			}
 		end
+		repo_threads.each { |x| x.join}
+		 puts "Finished in #{Time.now - start}"
 		repo_branches
 	end
 
