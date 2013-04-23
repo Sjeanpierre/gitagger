@@ -51,6 +51,7 @@ module GitHubHelper
 	end
 
 	def get_commits(git_connection,repo_name,repo_owner, branch_name=false)
+		# if branch name is provided method will return all commits from that branch. else return all commits from repo
 		if branch_name
 		  git_connection.get_request("/repos/#{repo_owner}/#{repo_name}/commits", { :sha =>"#{branch_name}"})
 		else
