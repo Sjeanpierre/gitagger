@@ -35,4 +35,16 @@ class GithubController < ApplicationController
 		user = User.find(session[:user_id])
 		Github.new :oauth_token => user.git_token
 	end
+
+	def check_session
+		redirect_to '/auth/github' unless User.valid_session?(session)
+	end
+
+	def check_token
+		unless valid_git_token?(establish_git_connection)
+		  User.handle_revoked_token(session)
+		  redirect_to '/auth/github'
+		end
+	end
+
 end

@@ -58,4 +58,18 @@ module GitHubHelper
 			#git_connection.get_request("/repos/#{repo_owner}/#{repo_name}/commits")
 		end
 	end
+
+	def get_repo_tags(git_connection,repo_name,repo_owner)
+    git_connection.repos.tags(repo_owner,repo_name)
+	end
+
+
+	def valid_git_token?(git_connection)
+		begin
+		  git_connection.orgs.list
+			return true
+		rescue => e
+			return false if e.http_status_code == 401
+		end
+	end
 end
