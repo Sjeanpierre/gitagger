@@ -1,13 +1,14 @@
 Gitagger::Application.routes.draw do
-  match "github/:repo_owner/:repo_name/branches", :to => 'github#branch'
-	match "github/:repo_owner/:repo_name/:branch_name/commits", :constraints => {:branch_name => /[^\/]+/}, :to => 'github#commit'
+  match 'github/:repo_owner/:repo_name/branches', :to => 'github#branch'
+	match 'github/:repo_owner/:repo_name/:branch_name/commits', :constraints => {:branch_name => /[^\/]+/}, :to => 'github#commit'
 	match 'github/:repo_owner/:repo_name/commits', :to => 'github#commit'
+	match 'github/:repo_owner/:repo_name/tags', :to => 'github#tag'
 
-  match "github/repos", :to => 'github#repo'
+  match 'github/repos', :to => 'github#repo'
 
-  get "github/tag"
+  get 'github/tag'
 
-  get "home/index"
+  get 'home/index'
 
 	resources :github do
 			get :branch
