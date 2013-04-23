@@ -1,5 +1,7 @@
 class GithubController < ApplicationController
 
+	before_filter :check_session, :check_token
+
 	include GitHubHelper
 
   def branch
@@ -19,14 +21,20 @@ class GithubController < ApplicationController
 
 	def commit
 	  git_connection = establish_git_connection
-		repo_name   = params[:repo_name]
-		repo_owner  = params[:repo_owner]
+		repo_name    = params[:repo_name]
+		repo_owner   = params[:repo_owner]
 		@branch_name = params[:branch_name]
 		@commits = get_commits(git_connection,repo_name,repo_owner,@branch_name)
 		render :commit
 	end
 
   def tag
+		git_connection = establish_git_connection
+		@repo_name  = params[:repo_name]
+		@repo_owner = params[:repo_owner]
+		@branch     = params[:repo_branch]
+		@tags = get_repo_tags(git_connection,@repo_name,@repo_owner)
+		render :tag
 	end
 
 

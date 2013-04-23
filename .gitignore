@@ -37,3 +37,7 @@
 .idea/gitagger.iml
 
 config/initializers/omniauth.rb
+
+config/github.yml
+
+config/database.yml
