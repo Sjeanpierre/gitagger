@@ -26,7 +26,7 @@
           <td><%=branch.commit.commit.committer["date"].to_date.to_s(:long)%></td>
           <td><%=branch.commit.commit.committer.name%></td>
           <td style="text-align:center;"><div class="btn-group">
-            <a class="btn btn-primary" href="#"><i class="icon-list icon-white"></i> Tag Head</a>
+            <a class="btn btn-primary" href="<%="/github/#@repo_owner/#@repo_name/branch/#{URI.escape(branch.name)}/tag" %>"><i class="icon-list icon-white"></i> Tag Head</a>
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="<%="/github/#@repo_owner/#@repo_name/#{URI.escape(branch.name)}/commits" %>"><i class="icon-tag"></i><%=" List commits in #{branch.name}"%></a></li>

@@ -3,8 +3,10 @@ Gitagger::Application.routes.draw do
 	match 'github/:repo_owner/:repo_name/:branch_name/commits', :constraints => {:branch_name => /[^\/]+/}, :to => 'github#commit'
 	match 'github/:repo_owner/:repo_name/commits', :to => 'github#commit'
 	match 'github/:repo_owner/:repo_name/tags', :to => 'github#tag'
-
+  match 'github/:repo_owner/:repo_name/:commit_sha/tag', :to => 'github#tagging_page'
+  match 'github/:repo_owner/:repo_name/branch/:branch_name/tag', :constraints => {:branch_name => /[^\/]+/}, :to => 'github#tagging_page'
   match 'github/repos', :to => 'github#repo'
+  match '/github/tag', :to => 'github#create_tag', :via => :post
 
   get 'github/tag'
 

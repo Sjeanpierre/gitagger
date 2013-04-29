@@ -21,10 +21,10 @@ class GithubController < ApplicationController
 
 	def commit
 	  git_connection = establish_git_connection
-		repo_name    = params[:repo_name]
-		repo_owner   = params[:repo_owner]
+		@repo_name    = params[:repo_name]
+		@repo_owner   = params[:repo_owner]
 		@branch_name = params[:branch_name]
-		@commits = get_commits(git_connection,repo_name,repo_owner,@branch_name)
+		@commits = get_commits(git_connection,@repo_name,@repo_owner,@branch_name)
 		render :commit
 	end
 
@@ -35,6 +35,30 @@ class GithubController < ApplicationController
 		@branch     = params[:repo_branch]
 		@tags = get_repo_tags(git_connection,@repo_name,@repo_owner)
 		render :tag
+  end
+
+	def tagging_page
+		@repo_name   = params['repo_name']
+		@repo_owner  = params['repo_owner']
+		@branch_name      = params['branch_name']
+		@sha         = params['commit_sha'] || get_commits(establish_git_connection,@repo_name,@repo_owner,@branch_name).first.sha
+		render :create_tag
+	end
+
+	def create_tag
+		@repo_name            = params['repo_name']
+		@repo_owner           = params['repo_owner']
+		@branch               = params['branch_name']
+		@sha                  = params['sha']
+		@user                 = User.find(session[:user_id])
+		params[:user_name]    = @user.name
+		params[:user_email]   = @user.email
+		tag_result = tag_repo(establish_git_connection,params)
+		if tag_result == true
+			flash[:notice] = "Tag #{params[:tag]} created successfully!"
+		else
+			flash[:notice] = "Could not create tag #{params[:tag]} in #@repo_name"
+		end
 	end
 
 
