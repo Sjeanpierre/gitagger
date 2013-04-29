@@ -50,7 +50,7 @@ module GitHubHelper
 	def get_commits(git_connection,repo_name,repo_owner, branch_name=false)
 		# if branch name is provided method will return all commits from that branch. else return all commits from repo
 		if branch_name
-		  git_connection.get_request("/repos/#{repo_owner}/#{repo_name}/commits", { :sha =>"#{branch_name}"})
+		  git_connection.get_request("/repos/#{repo_owner}/#{repo_name}/commits", { :sha => branch_name })
 		else
 			git_connection.repos.commits.all(repo_owner,repo_name)
 			#git_connection.get_request("/repos/#{repo_owner}/#{repo_name}/commits")
@@ -70,4 +70,31 @@ module GitHubHelper
 			return false if e.http_status_code == 401
 		end
 	end
+
+	def tag_repo(git_connection,params)
+		repo_name   = params['repo_name']
+		repo_owner  = params['repo_owner']
+		branch      = params['branch_name']
+		tag         = params['tag']
+		sha         = params['sha']
+		message     = params[:message] || 'tagged by gittagger'
+		user_name   = params[:user_name]
+		user_email  = params[:user_email]
+		pushed_tag_information = git_connection.git_data.tags.create repo_owner, repo_name,
+		                                                  'tag' =>  tag,
+		                                                  'message' => message,
+		                                                  'type' => 'commit',
+		                                                  'object' => sha,
+		                                                  'tagger' => {
+				                                                  'name' => user_name,
+				                                                  'email' => user_email,
+				                                                  'date' => Time.now
+		                                                  }
+		tag_sha = pushed_tag_information['sha']
+		git_connection.git_data.references.create repo_owner, repo_name,
+		                                               'ref' => "refs/tags/#{tag}",
+		                                               'sha' =>  pushed_tag_information['sha']
+		return true
+	end
+
 end

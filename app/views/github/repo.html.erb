@@ -24,7 +24,7 @@
             <a class="btn btn-primary" href="<%="/github/#{repo.owner.login}/#{repo.name}/branches" %>"><i class="icon-sitemap icon-white"></i> List Branches</a>
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#"><i class="icon-tag"></i> Tag Master</a></li>
+              <li><a href="<%="/github/#{repo.owner.login}/#{repo.name}/branch/master/tag" %>"><i class="icon-tag"></i> Tag Master</a></li>
               <li class="divider"></li>
               <li><a href="<%="/github/#{repo.owner.login}/#{repo.name}/commits" %>"><i class="icon-github"></i> Commits</a></li>
               <li class="divider"></li>
