@@ -26,8 +26,8 @@
           <td><%=commit.commit.committer.name%></td>
           <td><%=truncate(commit.commit.message, :length => 77, :omission => '...')%></td>
           <td style="text-align:center;"><div class="btn-group">
-            <a class="btn btn-primary" href="#"><i class="icon-tag icon-white"></i> Tag Commit</a>
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <a class="btn btn-primary" href="<%="/github/#@repo_owner/#@repo_name/#{commit.sha}/tag" %>"><i class="icon-tag icon-white"></i> Tag Commit</a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle='dropdown' href="#"><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#"><i class="icon-info-sign"></i> Commit Details</a></li>
             </ul>
