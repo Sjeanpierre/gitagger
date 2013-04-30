@@ -11,6 +11,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'github_api'
 gem 'attr_encrypted'
+gem 'thin'
 
 group :development do
 	gem 'pry'
