@@ -1,0 +1,15 @@
+<div class="container" style="margin-top: 10px" xmlns="http://www.w3.org/1999/html">
+	<h1>Commit Details</h1>
+    <div class="well commit_detail">
+      <p><b>Commit Sha: </b><%=@commit.sha%></p>
+      <p><b>Commit Message: </b><%=@commit.message%></p>
+      <p><b>Commit Date: </b> <%=	 @commit.author[:date].to_date.to_s(:long) %></p>
+      <p><b>Committer Name: </b> <%=	 @commit.author.name %></p>
+      <p><b>Committer Email: </b> <%=	 @commit.author.email %></p>
+	    <p><b>Github Url: </b> <a href="<%=	 @commit.html_url %>" >Commit Link</a></p>
+    </div>
+    <p>
+      <%= link_to 'Back',  :back, :class=> 'btn btn-primary btn-large'  %>
+      <a class="btn btn-primary btn-large" href="<%="/github/#{@repo_info['repo_owner']}/#{@repo_info['repo_name']}/#{@commit.sha}/tag" %>"><i class="icon-tag icon-white"></i> Tag Commit</a>
+    </p>
+</div>

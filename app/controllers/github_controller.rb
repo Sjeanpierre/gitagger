@@ -28,11 +28,24 @@ class GithubController < ApplicationController
 		render :commit
 	end
 
+	def commit_detail
+		@repo_info = params.to_hash
+		@commit = get_commit_details(establish_git_connection,params[:repo_name],params[:repo_owner],params[:commit_sha])
+		render :commit_detail
+	end
+
+	def tag_detail
+		@repo_info = params.to_hash
+		@tag_commit = get_commit_details(establish_git_connection,params[:repo_name],params[:repo_owner],params[:commit_sha])
+		render :tag_detail
+	end
+
   def tag
 		git_connection = establish_git_connection
 		@repo_name  = params[:repo_name]
 		@repo_owner = params[:repo_owner]
 		@branch     = params[:repo_branch]
+		@repo_info = params.to_hash
 		@tags = get_repo_tags(git_connection,@repo_name,@repo_owner)
 		render :tag
   end

@@ -29,11 +29,12 @@
             <a class="btn btn-primary" href="<%="/github/#@repo_owner/#@repo_name/#{commit.sha}/tag" %>"><i class="icon-tag icon-white"></i> Tag Commit</a>
             <a class="btn btn-primary dropdown-toggle" data-toggle='dropdown' href="#"><span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#"><i class="icon-info-sign"></i> Commit Details</a></li>
+              <li><a href="<%="/github/#@repo_owner/#@repo_name/#{commit.sha}" %>"><i class="icon-info-sign"></i> Commit Details</a></li>
             </ul>
           </div></td>
         </tr>
     <% end %>
     </tbody>
   </table>
+  <%= link_to 'Back',  :back, :class=> 'btn btn-primary btn-large'  %>
 </div>
