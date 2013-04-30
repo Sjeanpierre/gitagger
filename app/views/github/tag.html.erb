@@ -4,13 +4,14 @@
     oTable.fnSort( [ [1,'desc'] ] );
 } );
 
-// Using aoColumnDefs
-$(document).ready( function() {
-    $('#example').dataTable( {
-        "aoColumnDefs": [
-            { "bSearchable": false, "aTargets": [ 1 ] }
-        ] } );
-} );</script>
+//// Using aoColumnDefs
+//$(document).ready( function() {
+//    $('#example').dataTable( {
+//        "aoColumnDefs": [
+//            { "bSearchable": false, "aTargets": [ 1 ] }
+//        ] } );
+//} );
+</script>
 
 <div class="span10 offset4">
   <h1>Tags in <%=@repo_name%>(<%=@tags.count%>)</h1>
@@ -29,8 +30,8 @@ $(document).ready( function() {
         <tr class="odd gradeC">
           <td><%=tag.name%></td>
           <td style="text-align:center;"><div class="btn-group">
-            <a class="btn btn-primary" href="#"><i class="icon-list icon-white"></i> Tag Details</a>
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <a class="btn btn-primary" href="<%="/github/#{@repo_info['repo_owner']}/#{@repo_info['repo_name']}/#{URI.escape(tag.name)}/#{tag.commit.sha}" %>"><i class="icon-list icon-white"></i> Tag Details</a>
+            <a class='btn btn-primary dropdown-toggle' data-toggle='dropdown' href="#"><span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="#"><i class="icon-tag"></i>List</a></li>
             </ul>
@@ -39,4 +40,5 @@ $(document).ready( function() {
     <% end %>
     </tbody>
   </table>
+  <%= link_to 'Back',  :back, :class=> 'btn btn-primary btn-large'  %>
 </div>
