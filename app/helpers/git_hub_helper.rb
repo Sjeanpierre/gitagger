@@ -57,6 +57,11 @@ module GitHubHelper
 		end
 	end
 
+	def get_commit_details(git_connection,repo_name,repo_owner,sha)
+		#git_connection.get_request("/repos/#{repo_owner}/#{repo_name}/commits", { :sha => branch_name })
+		git_connection.git_data.commits.get(repo_owner,repo_name,sha)
+	end
+
 	def get_repo_tags(git_connection,repo_name,repo_owner)
     git_connection.repos.tags(repo_owner,repo_name)
 	end
