@@ -7,9 +7,15 @@
     <p><b>Committer Name: </b> <%=	 @tag_commit.author.name %></p>
     <p><b>Committer Email: </b> <%=	 @tag_commit.author.email %></p>
     <p><b>Github Url: </b> <a href="<%=	 @tag_commit.html_url %>" >Commit Link</a></p>
+    <%= form_tag '/github/tag/delete' do %>
+      <%= hidden_field_tag(:tags, @repo_info['tag']) %>
+      <%= hidden_field_tag(:repo_name, @repo_info['repo_name']) %>
+      <%= hidden_field_tag(:repo_owner, @repo_info['repo_owner']) %>
+      <%= submit_tag "Delete #{@repo_info['tag']} ", :class => 'btn btn-danger btn-large' %>
+    <% end %>
   </div>
   <p>
     <%= link_to 'Back',  :back, :class=> 'btn btn-primary btn-large'  %>
-    <a class="btn btn-primary btn-large" href="<%="/github/#{@repo_info['repo_owner']}/#{@repo_info['repo_name']}/#{@tag_commit.sha}/tag" %>"><i class="icon-tag icon-white"></i> Tag Commit</a>
+    <a class="btn btn-primary btn-large" href="<%="/github/#{@repo_info['repo_owner']}/#{@repo_info['repo_name']}/#{@tag_commit.sha}/tag" %>"><i class="icon-tag icon-white"></i> ReTag Commit</a>
   </p>
 </div>
