@@ -53,7 +53,7 @@ class GithubController < ApplicationController
 	def tagging_page
 		@repo_name   = params['repo_name']
 		@repo_owner  = params['repo_owner']
-		@branch_name      = params['branch_name']
+		@branch_name = params['branch_name']
 		@sha         = params['commit_sha'] || get_commits(establish_git_connection,@repo_name,@repo_owner,@branch_name).first.sha
 		render :create_tag
 	end
@@ -72,6 +72,16 @@ class GithubController < ApplicationController
 		else
 			flash[:notice] = "Could not create tag #{params[:tag]} in #@repo_name"
 		end
+	end
+
+	def delete_tags
+		@tags                 = params['tags']
+		@repo_name            = params['repo_name']
+		@repo_owner           = params['repo_owner']
+		params['tags']        = params['tags'].split(',')
+		delete_result = delete_repo_tags(establish_git_connection,params)
+		flash[:notice] = "The following tags were deleted successfully #@tags"
+		redirect_to :back
 	end
 
 
