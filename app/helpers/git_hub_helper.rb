@@ -27,7 +27,7 @@ module GitHubHelper
 		# it looks like the api only returns teams that the user is part of, including only pull access
 		org_teams = git_connection.orgs.teams.list(org)
 		#TODO verify that this permission rejection is setup properly
-		org_teams.delete_if { |team| team.permission == "pull" }
+		org_teams.delete_if { |team| team.permission == 'pull' }
 		org_teams
 	end
 
@@ -100,6 +100,13 @@ module GitHubHelper
 		                                               'ref' => "refs/tags/#{tag}",
 		                                               'sha' =>  pushed_tag_information['sha']
 		return true
+	end
+
+	def delete_repo_tags(git_connection,params)
+		params['tags'].each do |tag|
+			git_connection.git_data.references.delete(params['repo_owner'],params['repo_name'],"tags/#{tag}")
+			true
+		end
 	end
 
 end
