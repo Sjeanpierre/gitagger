@@ -80,7 +80,7 @@ class GithubController < ApplicationController
 		@repo_owner           = params['repo_owner']
 		params['tags']        = params['tags'].split(',')
 		delete_result = delete_repo_tags(establish_git_connection,params)
-		flash[:notice] = "The following tags were deleted successfully #@tags"
+		flash[:notice] = "The following tags were deleted successfully (#@tags)"
 		redirect_to :back
 	end
 
