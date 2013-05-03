@@ -7,9 +7,8 @@ class SessionsController < ApplicationController
 		@authorization = Authorization.find_by_provider_and_uid(authentication_hash['provider'], authentication_hash['uid'])
 		if @authorization
 			session[:user_id] = @authorization.user.id
-			#redirect user to repo list once logged in
 			flash[:notice] = "Welcome back #{@authorization.user.name}!"
-			redirect_to :controller => 'github', :action => 'repo'
+			redirect_to :controller => 'home', :action => 'index'
 		else
 			user = User.new(:name => authentication_hash['info']['name'],
 											:email => authentication_hash['info']['email'],
@@ -18,16 +17,15 @@ class SessionsController < ApplicationController
 			user.authorizations.build :provider => authentication_hash['provider'], :uid => authentication_hash['uid']
 			user.save
 			session[:user_id] = user.id
-			#redirect user to repo list when signup is complete
 			flash[:notice] = "Thank you for signing up #{user.name}!"
-			redirect_to :controller => 'github', :action => 'repo'
+			redirect_to :controller => 'home', :action => 'index'
 		end
 	end
 
 	def destroy
-		# is there a better way to destroy sessions?
 		session[:user_id] = nil
-		render :text => "You've logged out!"
+		flash[:notice] = "You've been successfully logged out!"
+		redirect_to :controller => 'home', :action => 'index'
 	end
 
   def failure

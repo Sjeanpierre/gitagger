@@ -1,14 +1,15 @@
-<div class="span10 offset4">
+<div class="container" style="margin-top: 10px" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <h2><%=	 "tagging #{@sha}@#{@repo_name}" %></h2>
-<div class="container" style="margin-top: 80px">
-  <%= form_tag '/github/tag' do %>
-	  <%= text_field_tag 'tag', '', :class => 'input-xxlarge', :placeholder => 'create tag' %>
+  <div class="well commit_detail">
+  <center><%= form_tag '/github/tag' do %>
+    <%= text_field_tag 'tag', '', :class => 'input-xxlarge', :placeholder => 'create tag' %>
     <%= hidden_field_tag(:sha, @sha) %>
     <%= hidden_field_tag(:repo_name, @repo_name) %>
     <%= hidden_field_tag(:repo_owner, @repo_owner) %>
-		<div><%= submit_tag 'Save', :class => 'btn btn-primary btn-large' %></div>
-	  <% end %>
+		  <p>
+      <%= submit_tag 'Save', :class => 'btn btn-primary btn-large' %>
+      <%= link_to 'Back',  :back, :class=> 'btn btn-primary btn-large'  %>
+	    <% end %>
+	   </p></center>
 </div>
-  <%= link_to 'Back',  :back, :class=> 'btn btn-primary btn-large'  %>
-	</div>
-
+</div>

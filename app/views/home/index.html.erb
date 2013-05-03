@@ -14,36 +14,12 @@
     <p>Painless Github Tagging anytime, anywhere
       <br>
     </p>
-    <p>
-      <%= link_to "Sign in using Github", "auth/github", :class => "btn btn-large btn-inverse" %>
+    <p>	    <%	 if @session['user_id'].nil? %>
+        <%= link_to 'Sign in using Github', '/auth/github', :class => 'btn btn-large btn-inverse' %>
+		  <% else %>
+        <%=	 link_to 'List  repositories', {:controller => 'github', :action => 'repo'}, :class => 'btn btn-large btn-primary' %>
+		  <% end %>
     </p>
-  </div>
-  <a class="btn btn-large btn-primary btn-block visible-phone" href="#"><span class="btn-label">Sign Up Today!</span></a>
-  <div class="row main-features">
-    <div class="span4">
-      <div class="well">
-        <h3>List Repositories</h3>
-        <p>List all repos that you have access to in Github, only repos with push access will be displayed</p>
-	      <p><%=	 link_to 'List repos', {:controller => 'github', :action => 'repo'}, :class => 'btn btn-primary' %></p>
-        <!--<a class="btn btn-primary" href="#"><span class="btn-label">Find Out More</span></a>-->
-      </div>
-    </div>
-    <div class="span4">
-      <div class="well">
-        <h3>Awesome Feature #2</h3>
-        <p>Enter a brief description of why it's so awesome here. Then move on to
-          the next feature.</p>
-        <a class="btn btn-info" href="#"><span class="btn-label">Find Out More</span></a>
-      </div>
-    </div>
-    <div class="span4">
-      <div class="well">
-        <h3>Awesome Feature #3</h3>
-        <p>Enter a brief description of why it's so awesome here. Then move on to
-          the next feature.</p>
-        <a class="btn btn-success" href="#"><span class="btn-label">Find Out More</span></a>
-      </div>
-    </div>
   </div>
 </div>
 <title>Landing Page</title>
