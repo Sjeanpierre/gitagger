@@ -6,7 +6,7 @@
     <p><b>Commit Message: </b><%=@tag_commit.message%></p>
     <p><b>Committer Name: </b> <%=	 @tag_commit.author.name %></p>
     <p><b>Committer Email: </b> <%=	 @tag_commit.author.email %></p>
-    <p><b>Github Url: </b> <a href="<%=	 @tag_commit.html_url %>" >Commit Link</a></p>
+    <p><b>Github Url: </b> <a href="<%=	 @tag_commit.html_url %>" target="_blank">Commit Link</a></p>
     <%= form_tag '/github/tag/delete' do %>
       <%= hidden_field_tag(:tags, @repo_info['tag']) %>
       <%= hidden_field_tag(:repo_name, @repo_info['repo_name']) %>
