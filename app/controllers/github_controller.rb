@@ -62,7 +62,7 @@ class GithubController < ApplicationController
 		@repo_name            = params['repo_name']
 		@repo_owner           = params['repo_owner']
 		@branch               = params['branch_name']
-		@sha                  = params['sha']
+		@sha                  = params['sha'] || get_commits(establish_git_connection,@repo_name,@repo_owner,@branch_name).first.sha
 		@user                 = User.find(session[:user_id])
 		params[:user_name]    = @user.name
 		params[:user_email]   = @user.email
@@ -72,6 +72,7 @@ class GithubController < ApplicationController
 		else
 			flash[:notice] = "Could not create tag #{params[:tag]} in #@repo_name"
 		end
+		redirect_to :back
 	end
 
 	def delete_tags
