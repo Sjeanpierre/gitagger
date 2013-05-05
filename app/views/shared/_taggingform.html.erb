@@ -1,0 +1,20 @@
+<!-- Modal -->
+<div id="tagModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="tagModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h4 id="tagModalLabel"><%=	 "tagging #{@commit.sha}@#{@repo_info['repo_name']}" %></h4>
+  </div>
+  <div class="modal-body">
+    <center><%= form_tag '/github/tag' do %>
+        <%= text_field_tag 'tag', '', :class => 'input-xlarge', :placeholder => 'create tag' %>
+        <%= hidden_field_tag(:sha, @commit.sha) %>
+        <%= hidden_field_tag(:repo_name, @repo_info['repo_name']) %>
+        <%= hidden_field_tag(:repo_owner, @repo_info['repo_owner']) %>
+        </center>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+          <%= submit_tag 'Save', :class => 'btn btn-primary btn-large' %>
+      <% end %>
+      </div>
+</div>

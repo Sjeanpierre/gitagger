@@ -10,6 +10,7 @@
     </div>
     <p>
       <%= link_to 'Back',  :back, :class=> 'btn btn-primary btn-large'  %>
-      <a class="btn btn-primary btn-large" href="<%="/github/#{@repo_info['repo_owner']}/#{@repo_info['repo_name']}/#{@commit.sha}/tag" %>"><i class="icon-tag icon-white"></i> Tag Commit</a>
+      <a role="button" data-toggle='modal' class="btn btn-primary btn-large" href='#tagModal'><i class="icon-tag icon-white"></i> Tag Commit</a>
     </p>
 </div>
+<%=	 render 'shared/taggingform' %>
