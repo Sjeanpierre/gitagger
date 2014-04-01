@@ -5,7 +5,6 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'mysql2'
 gem 'omniauth'
 gem 'omniauth-github'
@@ -18,6 +17,13 @@ group :development do
 	gem 'awesome_print'
 	gem 'better_errors'
 	gem 'binding_of_caller'
+end
+
+group :development do
+  gem 'pry'
+  gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 # Gems used only for assets and not required

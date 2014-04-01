@@ -67,10 +67,10 @@ class GithubController < ApplicationController
 		params[:user_name]    = @user.name
 		params[:user_email]   = @user.email
 		tag_result = tag_repo(establish_git_connection,params)
-		if tag_result == true
+		if tag_result
 			flash[:notice] = "Tag #{params[:tag]} created successfully!"
 		else
-			flash[:notice] = "Could not create tag #{params[:tag]} in #@repo_name"
+			flash[:error] = "Tag #{params[:tag]} already exists in #@repo_name, please provide unused tag"
 		end
 		redirect_to :back
 	end

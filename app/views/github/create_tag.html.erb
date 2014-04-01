@@ -1,5 +1,5 @@
 <div class="container" style="margin-top: 10px" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-  <h2><%=	 "tagging #{@sha}@#{@repo_name}" %></h2>
+  <h2><%=	 "Tagging #{@sha[0..9]}@#{@repo_name}" %></h2>
   <div class="well commit_detail">
   <center><%= form_tag '/github/tag' do %>
     <%= text_field_tag 'tag', '', :class => 'input-xxlarge', :placeholder => 'create tag' %>
